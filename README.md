@@ -38,6 +38,14 @@ run these tests):
 $ python3 tests/precision/precision_test.py tests/precision
 ```
 
+## Issues
+
+We heavily refactor and rewrite the entire VANS code. These features are currently missing/not-tested, and we will add them soon:
+
+1. GEM5 integration
+2. Multi-DIMM interleaving
+3. Memory mode
+
 ## License
 
-VANS use MIT license.
+![](https://img.shields.io/github/license/TheNetAdmin/VANS)
