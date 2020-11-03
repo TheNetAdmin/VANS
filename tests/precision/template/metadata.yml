@@ -1,0 +1,57 @@
+testname:
+    description: >
+        This is a mult-line description for the tests
+    repeat: val
+    input:
+        - argument0:
+            value: value0
+        - argument1:
+            string: str
+        - argument2:
+            # Merge each 'range' and 'array'
+            array:
+                - range:
+                    min: val
+                    max: val
+                    step: val
+                - range:
+                    min: val
+                    max: val
+                    step: val
+                - array:
+                    - val0
+                    - val1
+                    - val2
+
+name: Test Name
+description: >
+  Test description
+
+src_path: source_code_path
+out_path: output_path
+test_class: python_filename.class_name
+
+result_file: result_filename.csv
+reference_file: reference_filename.csv
+
+input:
+  argument0:
+    value: True
+  argument1:
+    value: 2 * 1024 * 1024
+  argument2:
+    # list: keep the list result
+    list: [ item1, item2 ]
+  argument3:
+    # array: evaluate and merge the sub-entries
+    array:
+      - "[1024 * x for x in range(1, 8)]"
+      - "[8192 * x for x in range(1, 8)]"
+      - "[64 * 1024 * x for x in range(1, 4)]"
+      - "[512 * 1024 * x for x in range(1, 16)]"
+
+override_config:
+  domain:
+    setting: value
+  ait:
+    buffer_entries: 256

@@ -1,0 +1,22 @@
+name: Bandwidth
+description: >
+    This is a bandwidth test. It use sequential read/write with various access size.
+
+src_path: bandwidth
+out_path: bandwidth
+test_class: bw_test.test
+
+result_file: bandwidth_result.csv
+
+input:
+    cache_trace:
+        value: True
+    pattern:
+        list: [ read, write ]
+    access_size:
+        array:
+            - "[ 2 ** x for x in range(6, 20) ]"
+    draw_counters:
+        value: True
+    idle_clk:
+        value: 0

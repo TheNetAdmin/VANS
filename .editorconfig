@@ -1,0 +1,40 @@
+# EditorConfig is a file format and collection of text editor plugins
+# for maintaining consistent coding styles between different editors
+# and IDEs. Most popular editors support this either natively or via
+# plugin.
+#
+# Check https://editorconfig.org for details.
+
+root = true
+
+[*]
+indent_size = 4
+insert_final_newline = true
+trim_trailing_whitespace = true
+end_of_line = lf
+charset = utf-8
+
+# For makefiles
+[*.{mak,mk}]
+indent_style = tab
+indent_size = 8
+
+[Makefile*]
+indent_style = tab
+indent_size = 8
+
+#  For C/C++
+[*.{c,h,cpp,hpp}]
+indent_style = space
+
+# For Python
+[*.py]
+max_line_length = 119
+
+# Config files
+[*.{json,yml,yaml}]
+indent_style = space
+indent_size = 2
+
+[*.{trace, tmp}]
+insert_final_newline = false

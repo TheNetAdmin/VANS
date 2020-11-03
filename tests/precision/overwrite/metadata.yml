@@ -1,0 +1,20 @@
+name: Overwrite
+description: >
+    This is a overwrite test. It overwrite a 256 region and measure latency of each write transaction.
+
+src_path: overwrite
+out_path: overwrite
+test_class: overwrite_test.test
+
+result_file: overwrite_result.csv
+reference_file: LPMEM-Overwrite-256.csv
+
+input:
+  cache_trace:
+    value: True
+  iter:
+    value: 4e5
+
+override_config:
+  trace:
+    report_tail_latency: 1

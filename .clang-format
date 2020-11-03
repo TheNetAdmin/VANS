@@ -1,0 +1,29 @@
+BasedOnStyle: LLVM
+Language: Cpp
+Standard: c++17
+IndentWidth: 4
+BreakBeforeBraces: Linux
+AlwaysBreakBeforeMultilineStrings: true
+AllowShortIfStatementsOnASingleLine: Never
+AllowShortLoopsOnASingleLine: false
+AllowShortFunctionsOnASingleLine: Empty
+IndentCaseLabels: false
+AlignTrailingComments: true
+AllowAllParametersOfDeclarationOnNextLine: false
+AlignConsecutiveAssignments: true
+AlignAfterOpenBracket: Align
+AlignConsecutiveMacros: true
+SpaceAfterCStyleCast: false
+MaxEmptyLinesToKeep: 2
+BreakBeforeBinaryOperators: NonAssignment
+BreakStringLiterals: false
+SortIncludes: true
+ContinuationIndentWidth: 4
+ColumnLimit: 120
+AlignConsecutiveBitFields: true # Requires clang-format 12.0 or later
+BreakConstructorInitializers: AfterColon
+ConstructorInitializerAllOnOneLineOrOnePerLine: true
+
+# https://stackoverflow.com/a/29526452
+BinPackArguments: false
+BinPackParameters: false

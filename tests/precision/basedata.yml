@@ -1,0 +1,25 @@
+# Run under project root dir
+
+name: Precision Test
+vans:
+  dramtrace_bin: bin/vans
+  config_file: config/vans.cfg
+tests:
+  - bandwidth
+  - overwrite
+  - ptr_chasing
+
+out_path: out/precision_test/
+
+thread: 10
+
+report:
+  generate: True
+  open: True
+  open_tool: xdg-open
+  print_config: False
+  template_path: tests/precision/template/report.Rmd
+  file_type: html
+  out_file: report.Rmd
+  slack: False
+  slack_url: https://hooks.slack.com/services/token/your_token

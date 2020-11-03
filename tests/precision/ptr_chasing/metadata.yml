@@ -1,0 +1,38 @@
+name: Pointer Chasing
+description: >
+  This is a pointer chasing test, including read and write
+
+src_path: ptr_chasing
+out_path: ptr_chasing
+test_class: pc_test.test
+
+result_file: ptr_chasing_result.csv
+reference_file: RaW-NI-NT-Granularity-93adde2.csv
+
+input:
+  cache_trace:
+    value: True
+  repeat_max_size:
+    value: 2 * 1024 * 1024
+  pattern:
+    list: [ read, write ]
+  access_size:
+    array:
+      - "[64 * x for x in range(1, 8)]"
+      - "[1024 * x for x in range(1, 8)]"
+      - "[8192 * x for x in range(1, 8)]"
+      - "[64 * 1024 * x for x in range(2, 4)]"
+      - "[512 * 1024 * x for x in range(1, 16)]"
+  draw_counters:
+    value: True
+  draw_simulation_performance:
+    value: True
+  counter_per_round:
+    list: [cnt.ait.events.eviction, cnt.rmw.events.eviction]
+
+## Make buffers smaller can significantly speedup the simulation
+#override_config:
+#  rmw:
+#    buffer_entries: 16
+#  ait:
+#    buffer_entries: 256
