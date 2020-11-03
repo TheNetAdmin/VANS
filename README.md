@@ -48,4 +48,4 @@ We heavily refactor and rewrite the entire VANS code. These features are current
 
 ## License
 
-![](https://img.shields.io/github/license/TheNetAdmin/VANS)
+[![](https://img.shields.io/github/license/TheNetAdmin/VANS)](LICENSE)
