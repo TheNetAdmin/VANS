@@ -166,7 +166,7 @@ void ait_controller::init_state_trans_table()
         auto wear_leveling_delay = this->table.check_wear_leveling(block_addr);
 
         /* Update counters*/
-        update_duration_cnt(w_miss_pwd);
+        update_duration_cnt(w_hit_pwd);
         if (wear_leveling_delay)
             cnt_events["migration"]++;
 
@@ -526,9 +526,7 @@ void ait_controller::tick_lmemq(clk_t curr_clk)
         lmemq_state.subreq_pending_index++;
         block_addr_t ait_addr   = translate_to_block_addr(front_req.addr);
         auto &entry             = this->buffer.entry_map.at(ait_addr);
-        logic_addr_t local_addr = entry.buffer_index * block_size_byte
-                                  + block_offset_rmw(entry.pending_request.rmw_block_addr) * rmw::block_size_byte;
-        logic_addr_t cl_addr = local_addr + lmemq_state.subreq_pending_index * cpu_cl_size;
+        logic_addr_t cl_addr = front_req.addr + lmemq_state.subreq_pending_index * cpu_cl_size;
         auto req_type        = front_req.type;
         auto callback        = [this](logic_addr_t logic_addr, clk_t curr_clk) {
             int offset                              = rmw::block_offset_cl(logic_addr);

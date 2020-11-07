@@ -302,6 +302,7 @@ class dram_media_controller : public media_controller<dram_media_request, DRAM<S
             req->depart = curr_clk + channel->spec->read_latency;
             pending_queue.push_back(*req);
         } else if (req->type == req_type::write) {
+            /* Write request's callback is served in upper level component once request issue is finished */
             channel->update_serving_requests(req->addr.mapped_addr.data(), -1, curr_clk);
         }
 
