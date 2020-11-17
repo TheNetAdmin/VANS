@@ -1,4 +1,4 @@
-# VANS: Validated cycle-Accurate Non-volatile memory Simulator
+# VANS: A Validated Non-Volatile Memory Simulator
 
 VANS is a cycle-level NVRAM simulator. Its performance is initially calibrated to match the Intel Optane Persistent
 Memory. But you can reconfigure VANS to model other NVRAM systems.
@@ -45,6 +45,20 @@ We heavily refactor and rewrite the entire VANS code. These features are current
 1. GEM5 integration
 2. Multi-DIMM interleaving
 3. Memory mode
+
+
+## Bibliography
+
+```bibtex
+@inproceedings{LENS-VANS,
+  author={Zixuan Wang and Xiao Liu and Jian Yang and Theodore Michailidis and Steven Swanson and Jishen Zhao},
+  booktitle={2020 53rd Annual IEEE/ACM International Symposium on Microarchitecture (MICRO)}, 
+  title={Characterizing and Modeling Non-Volatile Memory Systems}, 
+  year={2020},
+  pages={496-508},
+  doi={10.1109/MICRO50266.2020.00049}
+}
+```
 
 ## License
 
