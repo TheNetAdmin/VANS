@@ -43,7 +43,7 @@ $ Rscript -e 'rmarkdown::render("report.Rmd")'
 ```
 
 This should generate a HTML file containing only a title. If the generation success, then your `RMarkdown` environment
-is ready. If the generation failed, pleas open a GitHub issue and discuss the issues with the developers.
+is ready. If the generation failed, please open a GitHub issue and discuss the issues with the developers.
 
 ## Usage
 
