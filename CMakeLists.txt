@@ -34,7 +34,8 @@ add_executable(vans
                src/general/rmc.h
                src/general/trace.cpp
                src/general/trace.h
-               )
+               src/general/nvram_system.h
+               src/general/ddr4_system.h)
 
 target_include_directories(vans
                            PUBLIC

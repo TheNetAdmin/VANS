@@ -41,7 +41,7 @@ class imc_controller : public memory_controller<vans::base_request, vans::static
 
     /* imc_controller::full()
      *   This function returns true if both wpq and rpq are full.
-     *   You should check the first return value of `imc_controller::issue_request` to test if wpq or rpq is full.
+     *   You should check the first return value of `imc_controller::issue_request` to test if either wpq/rpq is full.
      */
     bool full() final
     {

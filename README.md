@@ -43,8 +43,7 @@ $ python3 tests/precision/precision_test.py tests/precision
 We heavily refactor and rewrite the entire VANS code. These features are currently missing/not-tested, and we will add them soon:
 
 1. GEM5 integration
-2. Multi-DIMM interleaving
-3. Memory mode
+2. Memory mode
 
 
 ## Bibliography
@@ -52,8 +51,8 @@ We heavily refactor and rewrite the entire VANS code. These features are current
 ```bibtex
 @inproceedings{LENS-VANS,
   author={Zixuan Wang and Xiao Liu and Jian Yang and Theodore Michailidis and Steven Swanson and Jishen Zhao},
-  booktitle={2020 53rd Annual IEEE/ACM International Symposium on Microarchitecture (MICRO)}, 
-  title={Characterizing and Modeling Non-Volatile Memory Systems}, 
+  booktitle={2020 53rd Annual IEEE/ACM International Symposium on Microarchitecture (MICRO)},
+  title={Characterizing and Modeling Non-Volatile Memory Systems},
   year={2020},
   pages={496-508},
   doi={10.1109/MICRO50266.2020.00049}

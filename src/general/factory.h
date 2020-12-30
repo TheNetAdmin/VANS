@@ -3,8 +3,10 @@
 
 #include "ait.h"
 #include "component.h"
+#include "ddr4_system.h"
 #include "imc.h"
 #include "nv_media.h"
+#include "nvram_system.h"
 #include "rmc.h"
 #include "rmw.h"
 #include "utils.h"
@@ -20,6 +22,10 @@ make_single_component(const std::string &name, const root_config &cfg, unsigned 
         ret = std::make_shared<rmc::rmc>(cfg["rmc"]);
     } else if (name == "imc") {
         ret = std::make_shared<imc::imc>(cfg["imc"]);
+    } else if (name == "ddr4_system") {
+        ret = std::make_shared<ddr4_system::ddr4_system>(cfg["ddr4_system"]);
+    } else if (name == "nvram_system") {
+        ret = std::make_shared<nvram_system::nvram_system>(cfg["nvram_system"]);
     } else if (name == "rmw") {
         ret = std::make_shared<rmw::rmw>(cfg["rmw"]);
     } else if (name == "ait") {
@@ -41,7 +47,7 @@ make_component(const std::string &name, const root_config &cfg, unsigned compone
             auto next = make_component(org.type, cfg, i);
             ret->connect_next(next);
         }
-        if (name == "rmw") {
+        if (name == "nvram_system") {
             auto dumper =
                 std::make_shared<vans::dumper>(get_dump_type(cfg), get_dump_filename(cfg, "stat_dump", component_id));
             ret->connect_dumper(dumper);
