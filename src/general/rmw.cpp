@@ -56,13 +56,15 @@ void rmw_controller::init_state_trans_table()
         [this](const decltype(this->get_next_level(addr_invalid)) &next, buffer_entry &entry, clk_t curr_clk) {
             block_addr_t rmw_addr = translate_to_block_addr(entry.pending_request.logic_addr);
             base_request req{vans::base_request_type::read, rmw_addr, curr_clk, this->next_level_read_callback};
-            return next->issue_request(req);
+            auto &next_component = std::get<1>(next);
+            return next_component->issue_request(req);
         };
     const auto issue_write_next_level =
         [this](const decltype(this->get_next_level(addr_invalid)) &next, buffer_entry &entry, clk_t curr_clk) {
             block_addr_t rmw_addr = translate_to_block_addr(entry.pending_request.logic_addr);
             base_request req{vans::base_request_type::write, rmw_addr, curr_clk, nullptr};
-            return next->issue_request(req);
+            auto &next_component = std::get<1>(next);
+            return next_component->issue_request(req);
         };
 
     const auto issue_write_local_memory = [this](buffer_entry &entry, clk_t curr_clk) {
@@ -512,7 +514,7 @@ void rmw_controller::init_state_trans_table()
         entry.last_used_clk = curr_clk;
         if (!entry.pending_request_cl_index.empty()) {
             /* Go to pending_read state if there are pending requests. */
-            entry.state = request_state::pending_read;
+            entry.state = request_state::init;
         } else {
             entry.state   = request_state::end;
             entry.pending = false;

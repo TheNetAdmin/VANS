@@ -11,13 +11,15 @@ void ait_controller::init_state_trans_table()
         [this](const decltype(this->get_next_level(addr_invalid)) &next, buffer_entry &entry, clk_t curr_clk) {
             block_addr_t blk_addr = translate_to_block_addr(entry.pending_request.rmw_block_addr);
             base_request req{vans::base_request_type::read, blk_addr, curr_clk, this->next_level_read_callback};
-            return next->issue_request(req);
+            auto &next_component = std::get<1>(next);
+            return next_component->issue_request(req);
         };
     const auto issue_write_next_level =
         [this](const decltype(this->get_next_level(addr_invalid)) &next, buffer_entry &entry, clk_t curr_clk) {
             block_addr_t blk_addr = translate_to_block_addr(entry.pending_request.rmw_block_addr);
             base_request req{vans::base_request_type::write, blk_addr, curr_clk, this->next_level_read_callback};
-            return next->issue_request(req);
+            auto &next_component = std::get<1>(next);
+            return next_component->issue_request(req);
         };
 
     const auto issue_lmemq = [this](buffer_entry &entry, base_request_type type, clk_t curr_clk) -> base_response {

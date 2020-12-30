@@ -7,7 +7,7 @@ out_path: ptr_chasing
 test_class: pc_test.test
 
 result_file: ptr_chasing_result.csv
-reference_file: RaW-NI-NT-Granularity-93adde2.csv
+reference_file: RaW-NonInterleaved-NT.csv
 
 input:
   cache_trace:
@@ -21,8 +21,8 @@ input:
       - "[64 * x for x in range(1, 8)]"
       - "[1024 * x for x in range(1, 8)]"
       - "[8192 * x for x in range(1, 8)]"
-      - "[64 * 1024 * x for x in range(2, 4)]"
-      - "[512 * 1024 * x for x in range(1, 16)]"
+#      - "[64 * 1024 * x for x in range(2, 4)]"
+#      - "[512 * 1024 * x for x in range(1, 16)]"
   draw_counters:
     value: True
   draw_simulation_performance:

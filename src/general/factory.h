@@ -33,6 +33,7 @@ make_single_component(const std::string &name, const root_config &cfg, unsigned 
     } else if (name == "nv_media") {
         ret = std::make_shared<nv_media>(cfg["nv_media"]);
     }
+    ret->assign_id(component_id);
     return ret;
 }
 

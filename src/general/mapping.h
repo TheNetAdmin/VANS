@@ -7,16 +7,21 @@
 namespace vans
 {
 
-/* Map an address to a component index */
-using component_mapping_f = std::function<addr_t(addr_t, size_t)>;
+/* Map an address to a tuple of:
+ *   1. address inside the component
+ *   2. index of the component
+ */
+using component_mapping_f = std::function<std::tuple<addr_t, size_t>(addr_t, size_t)>;
 
-static auto none_mapping = [](addr_t in_addr, size_t total_components) constexpr -> addr_t
+static auto none_mapping = [](addr_t in_addr, size_t total_components) constexpr -> std::tuple<addr_t, size_t>
 {
-    return 0;
+    return {in_addr, 0};
 };
 
-static auto stride_mapping_4096 = [](addr_t in_addr, size_t total_components) -> addr_t {
-    return (in_addr >> 12U) % total_components;
+static auto stride_mapping_4096 = [](addr_t in_addr, size_t total_components) -> std::tuple<addr_t, size_t> {
+    addr_t next_addr         = (((in_addr >> 12U) / total_components) << 12U) | (in_addr & 0xfff);
+    size_t next_component_id = (in_addr >> 12U) % total_components;
+    return {next_addr, next_component_id};
 };
 
 static component_mapping_f get_component_mapping_func(const std::string &mapping_func_name)

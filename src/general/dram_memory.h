@@ -137,7 +137,7 @@ class dram_media_controller : public media_controller<dram_media_request, DRAM<S
         case req_type::self_refresh:
             return misc_queue;
         default:
-            throw std::runtime_error("Internal error, state unknown by current implementation.");
+            throw std::runtime_error("Internal error, state unknown in current implementation.");
         }
     }
 

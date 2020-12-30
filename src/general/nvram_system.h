@@ -16,8 +16,9 @@ class nvram_system_controller : public memory_controller<vans::base_request, van
 
     base_response issue_request(base_request &request) override
     {
-        auto next = this->get_next_level(request.addr);
-        return next->issue_request(request);
+        auto [next_addr, next_component] = this->get_next_level(request.addr);
+        request.addr                     = next_addr;
+        return next_component->issue_request(request);
     }
 
     bool full() override

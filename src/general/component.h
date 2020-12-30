@@ -15,6 +15,7 @@ class base_component : public tick_able
   public:
     std::vector<std::shared_ptr<base_component>> next;
     std::shared_ptr<dumper> stat_dumper = nullptr;
+    size_t id                           = 0;
 
     base_component() = default;
 
@@ -34,6 +35,11 @@ class base_component : public tick_able
         tick_next(curr_clk);
     }
 
+    void assign_id(size_t new_id)
+    {
+        this->id = new_id;
+    }
+
     virtual void connect_next(const std::shared_ptr<base_component> &nc) = 0;
 
     virtual void connect_dumper(std::shared_ptr<dumper> dumper) = 0;
@@ -49,7 +55,6 @@ class base_component : public tick_able
     virtual void drain() = 0;
 };
 
-// template <typename MemoryControllerType, typename MemoryType, typename RequestType = base_request>
 template <typename MemoryControllerType, typename MemoryType> class component : public base_component
 {
   public:

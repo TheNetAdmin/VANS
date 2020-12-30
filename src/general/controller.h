@@ -49,10 +49,10 @@ template <typename... Types> class memory_controller : public controller<Types..
 
     virtual void drain_current() = 0;
 
-    virtual std::shared_ptr<base_component> get_next_level(addr_t addr)
+    virtual std::tuple<addr_t, std::shared_ptr<base_component>> get_next_level(addr_t addr)
     {
-        auto component_index = this->mapping_func(addr, this->next_level_components.size());
-        return this->next_level_components[component_index];
+        auto [next_addr, component_index] = this->mapping_func(addr, this->next_level_components.size());
+        return {next_addr, this->next_level_components[component_index]};
     }
 
     void drain() override

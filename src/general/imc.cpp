@@ -47,8 +47,9 @@ void imc_controller::tick(clk_t curr_clk)
     }
 
     if (queue_to_tick == read) {
-        auto &req = rpq.queue.front();
-        auto next = this->get_next_level(req.addr);
+        auto &req              = rpq.queue.front();
+        auto [next_addr, next] = this->get_next_level(req.addr);
+        req.addr               = next_addr;
         if (!next->full()) {
             auto [issued, deterministic, next_clk] = next->issue_request(req);
             if (issued) {
@@ -88,7 +89,7 @@ void imc_controller::flush_wpq()
             }
         }
 
-        auto next = this->get_next_level(req.addr);
+        auto [_, next] = this->get_next_level(req.addr);
         if (next->full()) {
             break;
         }
