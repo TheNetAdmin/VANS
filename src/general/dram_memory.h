@@ -114,12 +114,12 @@ class dram_media_controller : public media_controller<dram_media_request, DRAM<S
                                    logic_addr_t dram_start_addr) :
         channel(channel),
         start_addr(dram_start_addr),
-        report_epoch(cfg.get_value("report_epoch")),
-        queue_size(cfg.get_value("queue_size")),
-        act_queue(cfg.get_value("queue_size")),
-        misc_queue(cfg.get_value("queue_size")),
-        read_queue(cfg.get_value("queue_size")),
-        write_queue(cfg.get_value("queue_size"))
+        report_epoch(cfg.get_ulong("report_epoch")),
+        queue_size(cfg.get_ulong("queue_size")),
+        act_queue(cfg.get_ulong("queue_size")),
+        misc_queue(cfg.get_ulong("queue_size")),
+        read_queue(cfg.get_ulong("queue_size")),
+        write_queue(cfg.get_ulong("queue_size"))
     {
     }
 
@@ -338,14 +338,14 @@ class dram_memory : public memory<dram_media_controller<StandardType>, DRAM<Stan
 
         ddr                            = std::make_shared<StandardType>(t);
         using l                        = typename StandardType::level;
-        ddr->size                      = cfg.get_value("size");
-        ddr->data_width                = cfg.get_value("data_width");
-        ddr->count[int(l::channel)]    = cfg.get_value("channel");
-        ddr->count[int(l::rank)]       = cfg.get_value("rank");
-        ddr->count[int(l::bank_group)] = cfg.get_value("bank_group");
-        ddr->count[int(l::bank)]       = cfg.get_value("bank");
-        ddr->count[int(l::row)]        = cfg.get_value("row");
-        ddr->count[int(l::col)]        = cfg.get_value("col");
+        ddr->size                      = cfg.get_ulong("size");
+        ddr->data_width                = cfg.get_ulong("data_width");
+        ddr->count[int(l::channel)]    = cfg.get_ulong("channel");
+        ddr->count[int(l::rank)]       = cfg.get_ulong("rank");
+        ddr->count[int(l::bank_group)] = cfg.get_ulong("bank_group");
+        ddr->count[int(l::bank)]       = cfg.get_ulong("bank");
+        ddr->count[int(l::row)]        = cfg.get_ulong("row");
+        ddr->count[int(l::col)]        = cfg.get_ulong("col");
 
         mapper                 = std::make_shared<dram_mapping<StandardType>>(ddr, cfg);
         this->memory_component = std::make_shared<DRAM<StandardType>>(ddr, l::channel);
@@ -359,7 +359,7 @@ class dram_memory : public memory<dram_media_controller<StandardType>, DRAM<Stan
 
         this->memory_component->id = 0;
         this->ctrl                 = std::make_shared<dram_media_controller<StandardType>>(
-            cfg, this->memory_component, mapper, cfg.get_value("start_addr"));
+            cfg, this->memory_component, mapper, cfg.get_ulong("start_addr"));
     }
 
     void tick(clk_t curr_clk) final

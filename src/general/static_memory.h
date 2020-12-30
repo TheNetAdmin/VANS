@@ -26,7 +26,7 @@ class static_media_controller : public media_controller<base_request, static_med
     static_media_controller() = delete;
 
     explicit static_media_controller(const config &cfg) :
-        media_controller(), read_latency(cfg.get_value("read_latency")), write_latency(cfg.get_value("write_latency"))
+        media_controller(), read_latency(cfg.get_ulong("read_latency")), write_latency(cfg.get_ulong("write_latency"))
     {
     }
 

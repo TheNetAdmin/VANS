@@ -128,11 +128,11 @@ struct indirection_table {
     indirection_table() = delete;
 
     explicit indirection_table(const config &cfg) :
-        wear_leveling_threshold(cfg.get_value("wear_leveling_threshold")),
-        migration_block_entries(cfg.get_value("migration_block_entries")),
-        migration_latency(cfg.get_value("migration_latency"))
+        wear_leveling_threshold(cfg.get_ulong("wear_leveling_threshold")),
+        migration_block_entries(cfg.get_ulong("migration_block_entries")),
+        migration_latency(cfg.get_ulong("migration_latency"))
     {
-        table.reserve(cfg.get_value("min_table_entries"));
+        table.reserve(cfg.get_ulong("min_table_entries"));
     }
 
     void record_write(rmw::block_addr_t rmw_block_addr)
@@ -227,9 +227,9 @@ class ait_controller : public memory_controller<vans::base_request, vans::dram::
     ait_controller() = delete;
     explicit ait_controller(const config &cfg, std::shared_ptr<vans::dram::ddr::ddr4_memory> memory) :
         memory_controller(cfg),
-        lsq(cfg.get_value("lsq_entries")),
-        lmemq(cfg.get_value("lmemq_entries")),
-        buffer(cfg.get_value("buffer_entries")),
+        lsq(cfg.get_ulong("lsq_entries")),
+        lmemq(cfg.get_ulong("lmemq_entries")),
+        buffer(cfg.get_ulong("buffer_entries")),
         table(cfg)
     {
         static_assert(rmw::block_size_byte == 256, "Only support 256B rmw buffer block for now.");

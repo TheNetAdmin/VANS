@@ -221,15 +221,15 @@ class rmw_controller : public memory_controller<vans::base_request, static_memor
     rmw_controller() = delete;
     explicit rmw_controller(const vans::config &cfg, std::shared_ptr<static_memory> memory) :
         memory_controller(cfg),
-        buffer(cfg.get_value("buffer_entries")),
-        lsq(cfg.get_value("lsq_entries")),
-        roq(cfg.get_value("roq_entries"))
+        buffer(cfg.get_ulong("buffer_entries")),
+        lsq(cfg.get_ulong("lsq_entries")),
+        roq(cfg.get_ulong("roq_entries"))
     {
         this->init_state_trans_table();
         this->local_memory_model = std::move(memory);
 
-        this->timing.ait_to_rmw_latency = cfg.get_value("ait_to_rmw_latency");
-        this->timing.rmw_to_ait_latency = cfg.get_value("rmw_to_ait_latency");
+        this->timing.ait_to_rmw_latency = cfg.get_ulong("ait_to_rmw_latency");
+        this->timing.rmw_to_ait_latency = cfg.get_ulong("rmw_to_ait_latency");
     }
 
     bool check_and_evict();

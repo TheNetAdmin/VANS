@@ -10,12 +10,25 @@ namespace vans::rmc
 {
 class rmc_controller : public memory_controller<vans::base_request, vans::static_memory>
 {
+    addr_t start_addr;
+
   public:
     rmc_controller() = delete;
-    explicit rmc_controller(const config &cfg) : memory_controller(cfg) {}
+    explicit rmc_controller(const config &cfg) :
+        memory_controller(cfg)
+    {
+        if(cfg.check("start_addr")) {
+            this->start_addr = cfg.get_ulong("start_addr");
+        }
+    }
 
     base_response issue_request(base_request &request) override
     {
+        if (request.addr < this->start_addr) {
+            throw std::runtime_error("Internal error, incoming address " + std::to_string(request.addr)
+                                     + " is lower than rmc's start address " + std::to_string(this->start_addr));
+        }
+        request.addr -= this->start_addr;
         auto [next_addr, next_component] = this->get_next_level(request.addr);
         request.addr                     = next_addr;
         return next_component->issue_request(request);

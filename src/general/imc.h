@@ -21,9 +21,9 @@ class imc_controller : public memory_controller<vans::base_request, vans::static
 
     explicit imc_controller(const vans::config &cfg) :
         memory_controller(cfg),
-        wpq(cfg.get_value("wpq_entries")),
-        rpq(cfg.get_value(("rpq_entries"))),
-        adr_epoch(cfg.get_value("adr_epoch"))
+        wpq(cfg.get_ulong("wpq_entries")),
+        rpq(cfg.get_ulong(("rpq_entries"))),
+        adr_epoch(cfg.get_ulong("adr_epoch"))
     {
     }
 

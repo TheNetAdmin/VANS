@@ -59,10 +59,15 @@ class config : public base_config<std::string>
 
     explicit config(std::string section_name) : base_config<std::string>(), section_name(std::move(section_name)) {}
 
+    const bool check(const std::string &key) const
+    {
+        return this->cfg.count(key) == 1;
+    }
+
     const std::string &get_string(const std::string &key) const
     {
         try {
-            return cfg.at(key);
+            return this->cfg.at(key);
         } catch (std::out_of_range &e) {
             std::cerr << "Config value for key [" << key << "] not found under section [" << section_name << "]"
                       << std::endl;
@@ -70,7 +75,7 @@ class config : public base_config<std::string>
         }
     }
 
-    unsigned long get_value(const std::string &key) const
+    unsigned long get_ulong(const std::string &key) const
     {
         try {
             return std::stoul(this->cfg.at(key));
@@ -104,7 +109,7 @@ class root_config : public base_config<config>
             }
 
             if (curr_section.empty() && line[0] != '[') {
-                std::cerr << "vans::root_config: the first non-comment must be a section name" << std::endl;
+                std::cerr << "vans::root_config: the first non-comment line must be a section name" << std::endl;
                 exit(1);
             }
 

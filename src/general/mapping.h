@@ -65,7 +65,7 @@ template <typename StandardType> class dram_mapping
         prefetch_size(spec->prefetch_size),
         addr_bit_width(StandardType::total_levels)
     {
-#define LOAD_FROM_CONFIG(key) this->key = cfg.get_value(#key);
+#define LOAD_FROM_CONFIG(key) this->key = cfg.get_ulong(#key);
         LOAD_FROM_CONFIG(size)
         LOAD_FROM_CONFIG(data_width)
         LOAD_FROM_CONFIG(channel)

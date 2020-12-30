@@ -51,8 +51,8 @@ void run_trace(root_config &cfg, std::string &trace_filename, std::shared_ptr<ba
     bool critical_stall      = false;
     bool critical_load       = false;
     bool wait_idle_clk       = false;
-    auto heart_beat_epoch    = cfg["trace"].get_value("heart_beat_epoch");
-    auto report_epoch        = cfg["trace"].get_value("report_epoch");
+    auto heart_beat_epoch    = cfg["trace"].get_ulong("heart_beat_epoch");
+    auto report_epoch        = cfg["trace"].get_ulong("report_epoch");
     clk_t idle_clk_injection = clk_invalid;
     double tCK               = std::stod(cfg["basic"]["tCK"]);
 
@@ -70,7 +70,7 @@ void run_trace(root_config &cfg, std::string &trace_filename, std::shared_ptr<ba
     auto normal_read_callback = [&](logic_addr_t logic_addr, clk_t curr_clk) {};
 
     base_callback_f callback = normal_read_callback;
-    if (cfg["trace"].get_value("report_tail_latency") != 0) {
+    if (cfg["trace"].get_ulong("report_tail_latency") != 0) {
         callback = tail_latency_callback;
         std::cout << "Report tail latency" << std::endl;
     }
