@@ -8,6 +8,9 @@
 *.h     text diff=cpp eol=lf
 *.h++   text diff=cpp eol=lf
 *.hh    text diff=cpp eol=lf
+*.csv   text eol=lf
+*.py    text eol=lf
+*.yml   text eol=lf
 
 # Compiled Object files
 *.slo   binary
