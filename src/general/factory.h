@@ -14,7 +14,7 @@
 namespace vans::factory
 {
 
-std::shared_ptr<base_component>
+static std::shared_ptr<base_component>
 make_single_component(const std::string &name, const root_config &cfg, unsigned component_id)
 {
     std::shared_ptr<base_component> ret;
@@ -38,7 +38,7 @@ make_single_component(const std::string &name, const root_config &cfg, unsigned 
 }
 
 /* Recursively make component */
-std::shared_ptr<base_component>
+static std::shared_ptr<base_component>
 make_component(const std::string &name, const root_config &cfg, unsigned component_id = 0)
 {
     auto ret = make_single_component(name, cfg, component_id);
@@ -57,7 +57,7 @@ make_component(const std::string &name, const root_config &cfg, unsigned compone
     return ret;
 }
 
-std::shared_ptr<base_component> make(const root_config &cfg)
+static std::shared_ptr<base_component> make(const root_config &cfg)
 {
     /* Return a single virtual root memory controller */
     return make_component("rmc", cfg);

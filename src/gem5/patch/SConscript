@@ -1,0 +1,30 @@
+# -*- mode:python -*-
+
+import os
+
+Import('main')
+
+if not os.path.exists(Dir('.').srcnode().abspath + '/vans'):
+    main['HAVE_VANS'] = False
+    Return()
+
+main['HAVE_VANS'] = True
+
+vans_code_files = []
+
+def add_vans_code_file(filename):
+    vans_code_files.append(File('vans/src/' + filename))
+
+add_vans_code_file('general/ddr4.cpp')
+add_vans_code_file('general/ait.cpp')
+add_vans_code_file('general/imc.cpp')
+add_vans_code_file('general/rmw.cpp')
+add_vans_code_file('gem5/wrapper.cpp')
+
+vans_env = main.Clone()
+vans_env.Append(CPPPATH = Dir('../../src/'))
+vans_env.Library('vans', [vans_env.SharedObject(f) for f in vans_code_files])
+
+main.Prepend(CPPPATH = Dir('.'))
+main.Append(LIBS = ['vans'])
+main.Prepend(LIBPATH = [Dir('.')])

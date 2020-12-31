@@ -59,7 +59,7 @@ class config : public base_config<std::string>
 
     explicit config(std::string section_name) : base_config<std::string>(), section_name(std::move(section_name)) {}
 
-    const bool check(const std::string &key) const
+    bool check(const std::string &key) const
     {
         return this->cfg.count(key) == 1;
     }
