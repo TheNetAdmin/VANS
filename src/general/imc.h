@@ -4,6 +4,7 @@
 #include "controller.h"
 #include "request_queue.h"
 #include "static_memory.h"
+#include "common.h"
 
 namespace vans::imc
 {

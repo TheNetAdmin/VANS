@@ -42,8 +42,7 @@ $ python3 tests/precision/precision_test.py tests/precision
 
 We heavily refactor and rewrite the entire VANS code. These features are currently missing/not-tested, and we will add them soon:
 
-1. GEM5 integration
-2. Memory mode
+1. Memory mode
 
 
 ## Bibliography

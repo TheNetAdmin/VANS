@@ -12,8 +12,8 @@
 #include "mem/qport.hh"
 #include "params/VANS.hh"
 #include "vans/src/gem5/wrapper.h"
+#include "vans/src/general/common.h"
 #include "vans/src/general/config.h"
-#include "vans/src/general/utils.h"
 
 
 namespace vans

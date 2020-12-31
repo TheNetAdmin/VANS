@@ -5,8 +5,7 @@
 #include "mem/mem_object.hh"
 #include "sim/system.hh"
 #include "vans/src/gem5/wrapper.h"
-#include "vans/src/general/request_queue.h"
-#include "vans/src/general/utils.h"
+#include "vans/src/general/common.h"
 
 using std::bind;
 using vans::logic_addr_t;
@@ -148,8 +147,10 @@ bool VANS::recvTimingReq(PacketPtr pkt)
         return false;
 
     bool accepted = true;
+
+    vans::logic_addr_t addr = pkt->getAddr();
+
     if (pkt->isRead()) {
-        vans::logic_addr_t addr = pkt->getAddr();
         vans::base_request req(vans::base_request_type::read, addr, wrapper->get_clk(), read_callback);
         accepted = wrapper->send(req);
         if (accepted) {
@@ -163,7 +164,6 @@ bool VANS::recvTimingReq(PacketPtr pkt)
             req_stall = true;
         }
     } else if (pkt->isWrite()) {
-        vans::logic_addr_t addr = pkt->getAddr();
         vans::base_request req(vans::base_request_type::write, addr, wrapper->get_clk(), write_callback);
         accepted = wrapper->send(req);
         if (accepted) {
@@ -223,6 +223,7 @@ void VANS::readComplete(logic_addr_t addr, clk_t curr_clk)
 {
     DPRINTF(vans, "R %lx\n", addr);
 
+    assert(reads.count(addr) != 0);
     auto &pkt_q = reads.find(addr)->second;
 
     PacketPtr pkt = pkt_q.front();

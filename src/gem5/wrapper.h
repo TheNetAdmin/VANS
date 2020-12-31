@@ -1,12 +1,15 @@
 #ifndef VANS_GEM5_WRAPPER_H
 #define VANS_GEM5_WRAPPER_H
 
+#include "../general/common.h"
 #include "../general/config.h"
-#include "../general/factory.h"
+#include <memory>
 #include <string>
 
 namespace vans
 {
+class base_component;
+
 class gem5_wrapper
 {
     std::shared_ptr<base_component> memory;

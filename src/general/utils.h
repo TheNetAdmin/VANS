@@ -2,7 +2,7 @@
 #ifndef VANS_UTILS_H
 #define VANS_UTILS_H
 
-#include <cstdint>
+#include "common.h"
 #include <filesystem>
 #include <fstream>
 #include <iostream>
@@ -19,17 +19,6 @@ namespace fs = std::filesystem;
 
 namespace vans
 {
-
-using clk_t         = uint64_t;
-using addr_t        = uint64_t;
-using logic_addr_t  = uint64_t;
-using addr_offset_t = uint64_t;
-
-/* Compile time constants: https://stackoverflow.com/a/40405554 */
-enum : clk_t { clk_invalid = std::numeric_limits<uint64_t>::max() };
-enum : size_t { size_invalid = std::numeric_limits<size_t>::max() };
-enum : addr_t { addr_invalid = std::numeric_limits<uint64_t>::max() };
-enum : size_t { cpu_cl_size = 64, cpu_cl_bitshift = 6, /* Log2(CPU_CL_SIZE) --> Log2(64) */ };
 
 namespace dram
 {

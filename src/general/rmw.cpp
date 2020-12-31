@@ -1,5 +1,4 @@
 #include "rmw.h"
-
 namespace vans::rmw
 {
 

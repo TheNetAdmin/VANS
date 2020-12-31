@@ -1,6 +1,7 @@
 #ifndef VANS_COMPONENT_H
 #define VANS_COMPONENT_H
 
+#include "common.h"
 #include "config.h"
 #include "request_queue.h"
 #include "tick.h"

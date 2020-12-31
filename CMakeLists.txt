@@ -35,7 +35,10 @@ add_executable(vans
                src/general/trace.cpp
                src/general/trace.h
                src/general/nvram_system.h
-               src/general/ddr4_system.h)
+               src/general/ddr4_system.h
+               src/general/factory.cpp
+               src/general/common.h
+               )
 
 target_include_directories(vans
                            PUBLIC

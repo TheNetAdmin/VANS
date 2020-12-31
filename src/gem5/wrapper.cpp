@@ -1,5 +1,7 @@
 #include "wrapper.h"
-#include <cstdio>
+#include "../general/common.h"
+#include "../general/factory.h"
+#include <cassert>
 
 size_t vans::gem5_wrapper::vans_cnt = 0;
 
@@ -21,7 +23,6 @@ gem5_wrapper::gem5_wrapper(const std::string cfg_path)
     }
 
     auto cfg     = vans::root_config(cfg_fname);
-    printf("Init VANS id(%d) with cfg(%s)\n", vans_id, cfg_fname);
     this->memory = vans::factory::make(cfg);
     this->tCK    = std::stod(cfg["basic"].get_string("tCK"));
 }
@@ -34,6 +35,8 @@ void gem5_wrapper::tick()
 
 bool gem5_wrapper::send(vans::base_request req)
 {
+    if (req.addr % 64 != 0)
+        throw std::runtime_error("VANS only accepts 64 Byte aligned address, make sure you have a cache setup.");
     auto resp = this->memory->issue_request(req);
     return std::get<0>(resp);
 }

@@ -15,6 +15,7 @@ vans_code_files = []
 def add_vans_code_file(filename):
     vans_code_files.append(File('vans/src/' + filename))
 
+add_vans_code_file('general/factory.cpp')
 add_vans_code_file('general/ddr4.cpp')
 add_vans_code_file('general/ait.cpp')
 add_vans_code_file('general/imc.cpp')
