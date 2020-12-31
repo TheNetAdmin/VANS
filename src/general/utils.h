@@ -3,6 +3,7 @@
 #define VANS_UTILS_H
 
 #include <cstdint>
+#include <filesystem>
 #include <fstream>
 #include <iostream>
 #include <limits>
@@ -13,6 +14,8 @@
 #include <vector>
 
 #include "config.h"
+
+namespace fs = std::filesystem;
 
 namespace vans
 {
@@ -81,6 +84,8 @@ class dumper
             dump_to_file = false;
         }
         if (dump_to_file) {
+            fs::path filepath(filename);
+            fs::create_directories(filepath.parent_path());
             dump_file.open(filename);
             if (!dump_file.good())
                 throw std::runtime_error("cannot open dump file: " + filename);

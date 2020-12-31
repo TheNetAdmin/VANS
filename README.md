@@ -24,8 +24,8 @@ To run VANS with some sample traces:
 
 ```shell
 $ cd bin
-# Create a new directory for VANS output
-# VANS binary does not generate this dir automatically
+# Create a new directory for VANS output, or VANS will create it for you
+# See configuration file 'dump' section 'path' value
 $ mkdir vans_dump
 # Read config file and execute a trace
 $ ./vans -c ../config/vans.cfg -t ../tests/sample_traces/read.trace
