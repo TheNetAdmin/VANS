@@ -590,7 +590,9 @@ void rmw_controller::tick_lsq_read(clk_t curr_clk)
     } else {
         /* Buffer entry found, try to 1. patch the read request or 2. fast-forward */
         auto &entry = entry_pair->second;
-        if (entry.pending) {
+        if (entry.pending
+            && (entry.pending_request.type == request_type::read_cold
+                || entry.pending_request.type == request_type::read_ff)) {
             /* Patch read request */
             if (entry.pending_request_cl_index.empty()) {
                 throw std::runtime_error(
