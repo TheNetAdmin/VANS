@@ -23,6 +23,13 @@ add_vans_code_file('gem5/wrapper.cpp')
 
 vans_env = main.Clone()
 vans_env.Append(CPPPATH = Dir('../../src/'))
+vans_env.Append(CXXFLAGS=['-std=c++17'])
+vans_env.Append(CCFLAGS=['-Wno-error=deprecated-copy',
+                         '-Wno-error=address-of-packed-member',
+                         '-Wno-error=redundant-move',
+                         '-Wno-error=array-bounds',
+                         '-Wno-error=reorder',
+                         '-Wno-error=unused-variable'])
 vans_env.Library('vans', [vans_env.SharedObject(f) for f in vans_code_files])
 
 main.Prepend(CPPPATH = Dir('.'))
