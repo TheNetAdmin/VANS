@@ -3,7 +3,7 @@
 VANS is a cycle-level NVRAM simulator. Its performance is initially calibrated to match the Intel Optane Persistent
 Memory. But you can reconfigure VANS to model other NVRAM systems.
 
-VANS is part of our [MICRO 2020 paper](https://cseweb.ucsd.edu/~ziw002/files/micro20-lens-vans.pdf).
+VANS is part of our [MICRO 2020 paper](https://github.com/TheNetAdmin/LENS-VANS).
 
 ## Usage
 
