@@ -3,19 +3,20 @@
 #define VANS_UTILS_H
 
 #include "common.h"
-#include <filesystem>
+#include <cerrno>
+#include <cstring>
 #include <fstream>
 #include <iostream>
 #include <limits>
 #include <map>
 #include <memory>
 #include <string>
+#include <sys/types.h>
+#include <sys/stat.h>
 #include <utility>
 #include <vector>
 
 #include "config.h"
-
-namespace fs = std::filesystem;
 
 namespace vans
 {
@@ -63,7 +64,7 @@ class dumper
     dumper(const dumper &) = delete;
     dumper &operator=(const dumper &) = delete;
 
-    dumper(dumper::type dump_type, const std::string &filename) :
+    dumper(dumper::type dump_type, const std::string &filename, const std::string &dirname) :
         dump_type(dump_type),
         dump_to_file(dump_type == type::file || dump_type == type::both),
         dump_to_cli(dump_type == type::cli || dump_type == type::both)
@@ -73,8 +74,14 @@ class dumper
             dump_to_file = false;
         }
         if (dump_to_file) {
-            fs::path filepath(filename);
-            fs::create_directories(filepath.parent_path());
+            if (mkdir(dirname.c_str(), S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH) == -1) {
+                if (errno == EEXIST) {
+                    /* Pass, dir exists */
+                } else {
+                    std::cout << "Cannot create the dump dir: " << dirname << std::endl;
+                    throw std::runtime_error(strerror(errno));
+                }
+            }
             dump_file.open(filename);
             if (!dump_file.good())
                 throw std::runtime_error("cannot open dump file: " + filename);

@@ -7,7 +7,7 @@ VANS is part of our [MICRO 2020 paper](https://github.com/TheNetAdmin/LENS-VANS)
 
 ## Usage
 
-VANS is written in C++ 17, so it requires gcc 7.0 / clang 8.0 or newer version.
+VANS is written in C++ 17, so it requires gcc 7.0 / clang 8.0 or newer version. VANS is developed and tested with gcc 10.2.0.
 
 To configure and build VANS:
 

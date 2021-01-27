@@ -45,8 +45,8 @@ make_component(const std::string &name, const root_config &cfg, unsigned int com
             ret->connect_next(next);
         }
         if (name == "nvram_system") {
-            auto dumper =
-                std::make_shared<vans::dumper>(get_dump_type(cfg), get_dump_filename(cfg, "stat_dump", component_id));
+            auto dumper = std::make_shared<vans::dumper>(
+                get_dump_type(cfg), get_dump_filename(cfg, "stat_dump", component_id), cfg["dump"]["path"]);
             ret->connect_dumper(dumper);
         }
     }
