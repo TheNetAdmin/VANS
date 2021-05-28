@@ -244,7 +244,7 @@ class rmw_controller : public memory_controller<vans::base_request, static_memor
 
     bool pending_current() final
     {
-        return roq.pending() || buffer.pending();
+        return lsq.pending() || roq.pending() || buffer.pending();
     }
 
     bool full() final
