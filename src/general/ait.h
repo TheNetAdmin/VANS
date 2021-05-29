@@ -171,7 +171,7 @@ class ait_controller : public memory_controller<vans::base_request, vans::dram::
     base_request_queue lsq;   /* lsq: incoming load/store request queue */
     base_request_queue lmemq; /* lmemq: requests for local memory */
     struct lmemq_state_t {
-        int subreq_cnt           = 1;
+        int subreq_cnt           = 4;
         int subreq_pending_index = -1;
         bool subreq_served[4]    = {false};
         bool pending_front       = false;
