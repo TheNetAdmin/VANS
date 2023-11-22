@@ -1,7 +1,7 @@
-# VANS: A Validated Non-Volatile Memory Simulator
+# VANS: A Validated Heterogeneous Memory Simulator
 
-VANS is a cycle-level NVRAM simulator. Its performance is initially calibrated to match the Intel Optane Persistent
-Memory. But you can reconfigure VANS to model other NVRAM systems.
+VANS is a cycle-level Heterogeneous Memory simulator. Its performance is initially calibrated to match the Intel Optane Persistent
+Memory. But you can reconfigure VANS to model other systems.
 
 VANS is part of our [MICRO 2020 paper](https://github.com/TheNetAdmin/LENS-VANS).
 
